@@ -1,0 +1,7 @@
+mysql_host: 'mysql-db'
+mysql_user1: 'root'
+mysql_user2: 'newroot'
+mysql_password: 'toor'
+schema: 'test_db'
+table: 'event_log'
+path: "/opt"

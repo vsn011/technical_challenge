@@ -1,0 +1,25 @@
+version: "3.6"
+services:
+  python-app:
+    container_name: python-app
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+            mysql-db:
+                condition: service_healthy
+  mysql-db:
+    image: "mysql:8.0"
+    container_name: mysql-db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_USER: newuser
+      MYSQL_PASSWORD: ntoor
+    ports:
+      - "3306:3306"
+    healthcheck:
+            test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+            timeout: 40s
+            retries: 12
